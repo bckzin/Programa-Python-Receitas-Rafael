@@ -1,24 +1,25 @@
 file = open("BancoDados.txt","a")
 cadastros = {}
 
-print("""
----------------------------------
-Gerenciamento de Receitas
----------------------------------
+while True:
+    print("""
+    ---------------------------------
+    Gerenciamento de Receitas
+    ---------------------------------
 
-OPÇÕES:
-[1] - ADICIONAR
-[2] - VISUALIZAR
-[3] - ATUALIZAR
-[4] - DELETAR
+    OPÇÕES:
+    [1] - ADICIONAR
+    [2] - VISUALIZAR
+    [3] - ATUALIZAR
+    [4] - DELETAR
 
-[5] - SALVAR
-[6] - SAIR
+    [5] - SALVAR
+    [6] - SAIR
 
-""")
-escolha = int(input("Opção desejada : "))
+    """)
+    escolha = int(input("Opção desejada : "))
 
-if escolha == 1:
+    if escolha == 1:
         while True:
             vetor1 = []
             vetor2 = []
@@ -55,3 +56,7 @@ if escolha == 1:
             elif continuar != "S":
                 print("Opção inválida, saindo...")
                 break
+
+    elif escolha == 2:
+        arquivo = open("receitas.txt", "r")
+        print(arquivo.read())
