@@ -107,9 +107,15 @@ elif escolha == 5:  #Opção para salvar a(s) receitas
     file.write(str(f"{cadastros}\n"))
     print("Receitas salvas!")
 
-elif escolha == 6:  #Opção sair do programa
-        file.close()
-        exit()
+elif escolha == 6:  #Opção para receita aleatória
+    ALEA.aleatoria(cadastros)
 
-    else:
-        print("Opção não cadastrada.")
+elif escolha == 7:  #Opção para adicionar comentário
+    COM.comentario(cadastros)
+
+elif escolha == 8:  #Opção sair do programa
+    file.close()
+    exit()
+
+else:
+    print("Opção não cadastrada.")
