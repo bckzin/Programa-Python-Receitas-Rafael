@@ -60,3 +60,35 @@ while True:
     elif escolha == 2:
         arquivo = open("receitas.txt", "r")
         print(arquivo.read())
+
+    elif escolha == 3:  # Opção para atualizar uma receita
+        receita_atualizar = input("Nome da receita para atualizar: ")
+        if receita_atualizar in cadastros:
+            print(f"Receita '{receita_atualizar}' encontrada.")
+            print("Atualizando informações...")
+            pais = input("País de Origem (Deixe em branco para não alterar): ").capitalize()
+            if pais:
+                cadastros[receita_atualizar]["origem"] = pais
+            qntd = int(input("Quantidade de ingredientes (Deixe 0 para não alterar): "))
+            if qntd > 0:
+                ingredientes = []
+                print("\n-Lista de Ingredientes Atualizada-")
+                for i in range(qntd):
+                    ingredientes.append(input(f"{i + 1}º Ingrediente : "))
+                cadastros[receita_atualizar]["ingredientes"] = ingredientes
+
+            passos = int(input("Quantidade de passos do preparo (Deixe 0 para não alterar): "))
+            if passos > 0:
+                preparo = []
+                print("\n-Passos do Preparo Atualizado-")
+                for j in range(passos):
+                    preparo.append(input(f"{j+ 1}º Passo : "))
+                cadastros[receita_atualizar]["preparo"] = preparo
+
+            print("Receita atualizada com sucesso!")
+            print(cadastros)
+        else:
+            print(f"Receita '{receita_atualizar}' não encontrada.")
+
+    else:
+        print("Opção não cadastrada.")
