@@ -100,3 +100,9 @@ elif escolha == 4:  # Opção para deletar uma receita
         print(f"Receita '{receita_deletar}' deletada com sucesso!")
     else:
         print(f"Receita '{receita_deletar}' não encontrada.")
+
+
+elif escolha == 5:  #Opção para salvar a(s) receitas
+    file=open("BancoDados.txt","a")
+    file.write(str(f"{cadastros}\n"))
+    print("Receitas salvas!")
