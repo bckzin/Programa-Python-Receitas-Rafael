@@ -92,3 +92,11 @@ while True:
 
     else:
         print("Opção não cadastrada.")
+
+elif escolha == 4:  # Opção para deletar uma receita
+    receita_deletar = input("Nome da receita para deletar: ").capitalize
+    if receita_deletar in cadastros:
+        del cadastros[receita_deletar]
+        print(f"Receita '{receita_deletar}' deletada com sucesso!")
+    else:
+        print(f"Receita '{receita_deletar}' não encontrada.")
