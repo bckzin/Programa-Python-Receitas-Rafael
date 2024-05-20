@@ -1,7 +1,20 @@
 def visualizar(cadastros):
-    file = open("BancoDados.txt", "r")
-    pais = input("Digite o país a ser filtrado: ").capitalize()
-    for linha in file:
-        if pais in linha:
-            print(linha)
+    try:
+        with open("BancoDados.txt", "r") as file:
+            pais = input("Digite o país a ser filtrado: ").capitalize()
+            for linha in file:
+                if pais in linha:
+                    print(linha)
+
+            favs = input("Ver os favoritos? [S/N] ").upper()
+            if favs == "S":
+                with open("favoritos.txt", "r") as file_favs:
+                    for linha in file_favs:
+                        print(linha)
+            elif favs == "N":
+                print("Não mostrarei os favoritos")
+            else:
+                print("Opção inválida")
+    except FileNotFoundError:
+        print("Arquivo não encontrado")
     return cadastros
