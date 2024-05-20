@@ -106,3 +106,10 @@ elif escolha == 5:  #Opção para salvar a(s) receitas
     file=open("BancoDados.txt","a")
     file.write(str(f"{cadastros}\n"))
     print("Receitas salvas!")
+
+elif escolha == 6:  #Opção sair do programa
+        file.close()
+        exit()
+
+    else:
+        print("Opção não cadastrada.")
