@@ -1,7 +1,7 @@
 def visualizar(cadastros):
     try:
         with open("BancoDados.txt", "r") as file:
-            pais = input("Digite o país a ser filtrado: ").capitalize()
+            pais = input("Digite o país a ser filtrado ('Enter' para não filtrar): ").capitalize()
             for linha in file:
                 if pais in linha:
                     print(linha)
