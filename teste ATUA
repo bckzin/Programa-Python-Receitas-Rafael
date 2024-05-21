@@ -1,1 +1,39 @@
+def atualizar(cadastros):
+    receita_atualizar = input("Nome da receita para atualizar: ")
 
+    with open("BancoDados.txt", "r") as file:
+        linhas = file.readlines()
+
+    with open("BancoDados.txt", "w") as file:
+        for linha in linhas:
+            if receita_atualizar in linha:
+                campos = linha.split(' | ')
+                pais = input("País de Origem (Deixe em branco para não alterar): ").capitalize()
+                if pais:
+                    campos[1] = f"ORIGEM : {pais}"
+
+                qntd = int(input("\nQuantidade de ingredientes (Deixe em branco para não alterar): "))
+                if qntd:
+                    lista_ing = []
+                    print("-Lista de Ingredientes-")
+                    for i in range(qntd):
+                        ingredientes = (input(f"{i + 1}º Ingrediente : "))
+                        lista_ing.append(f"{i + 1}º ingrediente = {ingredientes}")
+                    ing = ", ".join(lista_ing)
+                    campos[2] = f"INGREDIENTES : {ing}"
+
+                passos = int(input("\nQuantidade de passos do preparo (Deixe em branco para não alterar): "))
+                if passos:
+                    lista_prep = []
+                    print("-Passos do Preparo-")
+                    for j in range(passos):
+                        preparo = (input(f"{j + 1}º Passo : "))
+                        lista_prep.append(f"{j + 1}º passo = {preparo}")
+                    prep = ", ".join(lista_prep)
+                    campos[3] = f"PREPARO : {prep}"
+
+                linha = ' | '.join(campos)
+                print("Receita atualizada com sucesso!")
+            file.write(linha)
+
+    return cadastros
