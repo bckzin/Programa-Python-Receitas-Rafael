@@ -1,121 +1,55 @@
-file = open("BancoDados.txt","a")
-cadastros = {}
+import ADD, VISU, ATUA, DEL, ALEA, COM 
 
 while True:
-    print("""
-    ---------------------------------
-    Gerenciamento de Receitas
-    ---------------------------------
 
-    OPÇÕES:
-    [1] - ADICIONAR
-    [2] - VISUALIZAR
-    [3] - ATUALIZAR
-    [4] - DELETAR
+        file = open("BancoDados.txt","a")
+        cadastros = {}
 
-    [5] - SALVAR
-    [6] - SAIR
-
-    """)
-    escolha = int(input("Opção desejada : "))
-
-    if escolha == 1:
         while True:
-            vetor1 = []
-            vetor2 = []
+            print("---------------------------------")
+            print("----GERENCIAMENTO DE RECEITAS----")
+            print("---------------------------------")
+            print("---------MENU DE OPÇÕES----------")
+            print("\n[1] - ADICIONAR RECEITAS")
+            print("[2] - VISUALIZAR RECEITAS")
+            print("[3] - ATUALIZAR RECEITAS")
+            print("[4] - DELETAR RECEITAS")
+            print("[5] - SALVAR RECEITAS")
+            print("[6] - RECEITA ALEATÓRIA")
+            print("[7] - COMENTÁRIOS")
+            print("[8] - SAIR")
+            try: 
+                while True:
+                    escolha = int(input("Opção desejada : "))
+                    if 1 <= escolha <= 8:
+                        break
 
-            receita = input("Nome da receita : ")
-            pais = input("País de Origem : ").capitalize()
+            except ValueError:
+                print("Digite um número.")
 
-            qntd = int(input("\nQuantidade de ingredientes : "))
-            print("-Lista de Ingredientes-")
-            for i in range(qntd):
-                ingredientes = (input(f"{i + 1}º Ingrediente : "))
-                vetor1.append(f"{i + 1}º ingrediente = {ingredientes}")
-                ing = ", ".join(vetor1)
+            if escolha == 1:  #Opção para adicionar uma receita
+                cadastros = ADD.adicionar(cadastros)
 
-            passos = int(input("\nQuantidade de passos do preparo : "))
-            print("-Passos do Preparo-")
-            for j in range(passos):
-                preparo = (input(f"{j + 1}º Passo : "))
-                vetor2.append(f"{i + 1}º passo = {preparo}")
-                prep = ", ".join(vetor2)
+            elif escolha == 2:  #Opção para visualizar receitas
+                VISU.visualizar(cadastros)
 
+            elif escolha == 3:  #Opção para atualizar uma receita
+                cadastros = ATUA.atualizar(cadastros)
 
-            arquivo = open("receitas.txt", "a")
-            arquivo.write(f"RECEITA : {receita} | ORIGEM : {pais} | INGREDIENTES : {ing} | PREPARO : {prep}\n")
+            elif escolha == 4:  #Opção para deletar uma receita
+                cadastros = DEL.deletar(cadastros)
 
-            continuar = input("Deseja continuar adicionando receitas [S] ou [N] : ").upper()
+            elif escolha == 5:  #Opção para salvar a(s) receitas
+                file=open("BancoDados.txt","a")
+                file.write(str(f"{cadastros}\n"))
+                print("Receitas salvas!")
 
-            if continuar == "N":
-                arquivo.close()
-                arquivo = open("receitas.txt", "r")
-                print(arquivo.read())
-                break
+            elif escolha == 6:  #Opção para receita aleatória
+                ALEA.aleatoria(cadastros)
 
-            elif continuar != "S":
-                print("Opção inválida, saindo...")
-                break
+            elif escolha == 7:  #Opção para adicionar comentário
+                COM.comentario(cadastros)
 
-    elif escolha == 2:
-        arquivo = open("receitas.txt", "r")
-        print(arquivo.read())
-
-    elif escolha == 3:  # Opção para atualizar uma receita
-        receita_atualizar = input("Nome da receita para atualizar: ")
-        if receita_atualizar in cadastros:
-            print(f"Receita '{receita_atualizar}' encontrada.")
-            print("Atualizando informações...")
-            pais = input("País de Origem (Deixe em branco para não alterar): ").capitalize()
-            if pais:
-                cadastros[receita_atualizar]["origem"] = pais
-            qntd = int(input("Quantidade de ingredientes (Deixe 0 para não alterar): "))
-            if qntd > 0:
-                ingredientes = []
-                print("\n-Lista de Ingredientes Atualizada-")
-                for i in range(qntd):
-                    ingredientes.append(input(f"{i + 1}º Ingrediente : "))
-                cadastros[receita_atualizar]["ingredientes"] = ingredientes
-
-            passos = int(input("Quantidade de passos do preparo (Deixe 0 para não alterar): "))
-            if passos > 0:
-                preparo = []
-                print("\n-Passos do Preparo Atualizado-")
-                for j in range(passos):
-                    preparo.append(input(f"{j+ 1}º Passo : "))
-                cadastros[receita_atualizar]["preparo"] = preparo
-
-            print("Receita atualizada com sucesso!")
-            print(cadastros)
-        else:
-            print(f"Receita '{receita_atualizar}' não encontrada.")
-
-    else:
-        print("Opção não cadastrada.")
-
-elif escolha == 4:  # Opção para deletar uma receita
-    receita_deletar = input("Nome da receita para deletar: ").capitalize
-    if receita_deletar in cadastros:
-        del cadastros[receita_deletar]
-        print(f"Receita '{receita_deletar}' deletada com sucesso!")
-    else:
-        print(f"Receita '{receita_deletar}' não encontrada.")
-
-
-elif escolha == 5:  #Opção para salvar a(s) receitas
-    file=open("BancoDados.txt","a")
-    file.write(str(f"{cadastros}\n"))
-    print("Receitas salvas!")
-
-elif escolha == 6:  #Opção para receita aleatória
-    ALEA.aleatoria(cadastros)
-
-elif escolha == 7:  #Opção para adicionar comentário
-    COM.comentario(cadastros)
-
-elif escolha == 8:  #Opção sair do programa
-    file.close()
-    exit()
-
-else:
-    print("Opção não cadastrada.")
+            elif escolha == 8:  #Opção sair do programa
+                file.close()
+                exit()
